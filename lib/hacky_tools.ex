@@ -11,8 +11,6 @@ defmodule HackyTools do
   end
 
   defp hacky_transpose(input) do
-    IO.inspect(input)
-
     input
     |> Enum.reduce([], fn values, output ->
       output =

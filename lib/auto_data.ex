@@ -28,7 +28,7 @@ defmodule AutoData do
       parsed
       |> slice_columns(input_columns)
       |> HackyTools.hacky_normalize()
-      |> Enum.map(&Nx.tensor/1)
+      |> Enum.map(fn i -> Nx.tensor([i]) end)
       |> split(test_train_ratio)
 
     {test_targets, train_targets} =
