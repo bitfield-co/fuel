@@ -50,23 +50,6 @@ defmodule Handroll do
     end)
   end
 
-  defn predict({m, b}, x) do
-    x
-    |> Nx.dot(m)
-    |> Nx.add(b)
-  end
-
-  defn loss(params, x, y) do
-    y_pred = predict(params, x)
-    Nx.mean(Nx.power(y - y_pred, 2))
-  end
-
-  defn init_random_params do
-    weights = Nx.random_normal({3, 1}, 0.0, 0.1)
-    bias = Nx.random_normal({1, 1}, 0.0, 0.1)
-    {weights, bias}
-  end
-
   defn update({m, b} = params, input, target) do
     {grad_m, grad_b} = grad(params, &loss(&1, input, target))
 
@@ -74,6 +57,23 @@ defmodule Handroll do
       m - grad_m * 0.01,
       b - grad_b * 0.01
     }
+  end
+
+  defn loss(params, x, y) do
+    y_pred = predict(params, x)
+    Nx.mean(Nx.power(y - y_pred, 2))
+  end
+
+  defn predict({m, b}, x) do
+    x
+    |> Nx.dot(m)
+    |> Nx.add(b)
+  end
+
+  defn init_random_params do
+    weights = Nx.random_normal({3, 1}, 0.0, 0.1)
+    bias = Nx.random_normal({1, 1}, 0.0, 0.1)
+    {weights, bias}
   end
 
   defp scalar(tensor) do
