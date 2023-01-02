@@ -21,8 +21,9 @@ defmodule Fuel.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:axon, "~> 0.1.0-dev", github: "elixir-nx/axon", branch: "main"},
-      {:nx, "~> 0.1.0-dev", github: "elixir-nx/nx", sparse: "nx", override: true}
+      {:axon, "~> 0.3"},
+      {:exla, "~> 0.4"},
+      {:nx, "~> 0.4"},
     ]
   end
 end
