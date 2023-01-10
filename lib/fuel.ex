@@ -32,7 +32,7 @@ defmodule Fuel do
 
     params =
       model
-      |> Axon.Loop.trainer(:mean_squared_error, Axon.Optimizers.adamw(@learning_rate))
+      |> Axon.Loop.trainer(:mean_absolute_error, Axon.Optimizers.adamw(@learning_rate))
       |> Axon.Loop.metric(:accuracy)
       |> Axon.Loop.run(data, %{}, epochs: @epochs, compiler: EXLA)
 
