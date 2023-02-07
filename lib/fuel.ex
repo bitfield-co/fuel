@@ -1,10 +1,8 @@
 defmodule Fuel do
-  require Axon
   require Logger
 
   @epochs 30
   @learning_rate 0.001
-  @loss :mean_absolute_error
   @dropout_rate 0.1
 
   @input_columns [
@@ -24,41 +22,29 @@ defmodule Fuel do
       )
 
     # train the model
-    model = train(train_inputs, train_targets)
+    data = Enum.zip(train_inputs, train_targets)
+
+    model =
+      Axon.input("input", shape: {nil, Enum.count(@input_columns)})
+      |> Axon.dense(10)
+      |> Axon.dropout(rate: @dropout_rate)
+      |> Axon.dense(1)
+
+    params =
+      model
+      |> Axon.Loop.trainer(:mean_absolute_error, Axon.Optimizers.adamw(@learning_rate))
+      |> Axon.Loop.metric(:accuracy)
+      |> Axon.Loop.run(data, %{}, epochs: @epochs, compiler: EXLA)
+
+    {_init_fn, predict_fn} = Axon.build(model)
 
     # make some predictions
     test_inputs
     |> Enum.zip(test_targets)
     |> Enum.each(fn {car_input, actual_mpg} ->
-      predicted_mpg = predict(model, car_input)
-      Logger.info("Actual: #{scalar(actual_mpg)}. Predicted: #{predicted_mpg}")
+      predicted_mpg = predict_fn.(params, car_input)
+      Logger.info("Actual: #{scalar(actual_mpg)}. Predicted: #{scalar(predicted_mpg)}")
     end)
-  end
-
-  def train(inputs, targets) do
-    model =
-      Axon.input({nil, Enum.count(@input_columns)})
-      |> Axon.dense(10)
-      |> Axon.dropout(rate: @dropout_rate)
-      |> Axon.dense(1)
-
-    Logger.info(inspect(model))
-
-    optimizer = Axon.Optimizers.adamw(@learning_rate)
-
-    %{params: trained_params} =
-      model
-      |> Axon.Training.step(@loss, optimizer)
-      |> Axon.Training.train(inputs, targets, epochs: @epochs)
-
-    {model, trained_params}
-  end
-
-  def predict({model, trained_params}, car_input) do
-    model
-    |> Axon.predict(trained_params, car_input)
-    |> Nx.to_flat_list()
-    |> List.first()
   end
 
   def scalar(tensor) do

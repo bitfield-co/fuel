@@ -1,5 +1,10 @@
 %{
-  "axon": {:git, "https://github.com/elixir-nx/axon.git", "b15be1f1657138a57eb38e054fded99424b5fe9a", [branch: "main"]},
-  "nx": {:git, "https://github.com/elixir-nx/nx.git", "f820a3564028157c341a35a7caeb2377a42fa160", [sparse: "nx"]},
+  "axon": {:hex, :axon, "0.3.1", "d2f678871d439ff623c50eecb255e2e89de9e2cd5d4bb7a40d9a80f3a46b86d1", [:mix], [{:kino, "~> 0.7", [hex: :kino, repo: "hexpm", optional: true]}, {:nx, "~> 0.4.0", [hex: :nx, repo: "hexpm", optional: false]}, {:table_rex, "~> 3.1.1", [hex: :table_rex, repo: "hexpm", optional: true]}], "hexpm", "01e0c085a3f26d0cccd44e29a2f308c537ad71d573bb853130f1fd484caccd55"},
+  "complex": {:hex, :complex, "0.4.2", "923e5db0be13dbb3ea00cf8459d9f75f3afdd9ff5a82742ded21064330d28273", [:mix], [], "hexpm", "069a085ef820ce675a2619fd125b963ff4514af2102c7f7d7965128e5ec0a429"},
+  "elixir_make": {:hex, :elixir_make, "0.7.3", "c37fdae1b52d2cc51069713a58c2314877c1ad40800a57efb213f77b078a460d", [:mix], [{:castore, "~> 0.1", [hex: :castore, repo: "hexpm", optional: true]}], "hexpm", "24ada3e3996adbed1fa024ca14995ef2ba3d0d17b678b0f3f2b1f66e6ce2b274"},
+  "exla": {:hex, :exla, "0.4.1", "409a3294720e31bbcd03c3eacd654686feb0ed7ba3e42314a269eeaa7cfd3c76", [:make, :mix], [{:elixir_make, "~> 0.6", [hex: :elixir_make, repo: "hexpm", optional: false]}, {:nx, "~> 0.4.1", [hex: :nx, repo: "hexpm", optional: false]}, {:telemetry, "~> 0.4.0 or ~> 1.0", [hex: :telemetry, repo: "hexpm", optional: false]}, {:xla, "~> 0.4.0", [hex: :xla, repo: "hexpm", optional: false]}], "hexpm", "0410a0c38b94d2be4b713753c86f33ab8400b5cc8b59100266a0a6c58c17871d"},
+  "nx": {:hex, :nx, "0.4.1", "3cc8e420d0835ab7cac94f253950dee3ff927c68798ae88a3e4ff184a825b042", [:mix], [{:complex, "~> 0.4.2", [hex: :complex, repo: "hexpm", optional: false]}], "hexpm", "0b33fccaf76ebc6e79d53fe1149a70f99838e6505e9e7092e5a0a57b131b27c6"},
   "table_rex": {:hex, :table_rex, "3.1.1", "0c67164d1714b5e806d5067c1e96ff098ba7ae79413cc075973e17c38a587caa", [:mix], [], "hexpm", "678a23aba4d670419c23c17790f9dcd635a4a89022040df7d5d772cb21012490"},
+  "telemetry": {:hex, :telemetry, "1.1.0", "a589817034a27eab11144ad24d5c0f9fab1f58173274b1e9bae7074af9cbee51", [:rebar3], [], "hexpm", "b727b2a1f75614774cff2d7565b64d0dfa5bd52ba517f16543e6fc7efcc0df48"},
+  "xla": {:hex, :xla, "0.4.3", "cf6201aaa44d990298996156a83a16b9a87c5fbb257758dbf4c3e83c5e1c4b96", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm", "caae164b56dcaec6fbcabcd7dea14303afde07623b0cfa4a3cd2576b923105f5"},
 }
